@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ekart Flex</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="partner.html"><img src="images/logo.png"></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav flotLeft">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partner <span class="caret orangeColor"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Partner Center</a></li>
+                        <li><a href="#">Partner Executive</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partner Center<span class="caret orangeColor"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Partner</a></li>
+                        <li><a href="#">Partner Executive</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partner Executive<span class="caret orangeColor"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Partner Center</a></li>
+                        <li><a href="#">Partner Executive</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a><span class="glyphicon glyphicon-user" aria-hidden="true"></span> User Name</a>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<!-- Begin page content -->
+<div class="container">
+    <div class="page-header">
+        <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+            <h4>Partner Name (<span class="linkColor">FLEX106789</span>)</h4>
+            <p><strong>Status: </strong>Approved</p>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
+            <div class="form-horizontal row">
+                <label class="col-lg-4 col-md-4 col-sm-5 col-xs-6 control-label">Action :</label>
+                <div class="col-lg-5 col-md-5 col-sm-4 col-xs-8">
+                    <select class="form-control" id="actions">
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="edit">Edit</option>
+                    </select>
+                    <div class="hidediv">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <button type="button" class="btn orangeBackground whiteColor br0" id="cancelAction">CANCEL</button>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                            <button type="button" class="btn orangeBackground whiteColor br0">SAVE</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 hideOnAction">
+                    <button type="button" class="btn orangeBackground whiteColor br0">SUBMIT</button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <img class="sectionIcon" src="images/bank-title-icon.png"/>
+            <p class="ml15">Addresses</p>
+            <div class="form-horizontal">
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Local Address</label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <textarea class="custom form-control enableIt" rows="3" disabled="disabled"></textarea>
+                        <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Permanent Address</label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <textarea class="custom form-control enableIt" rows="3" disabled></textarea>
+                        <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <img class="sectionIcon" src="images/bank-title-icon.png"/>
+            <p class="ml15">Contact Details</p>
+            <div class="form-horizontal">
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Phone Number</label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="custom form-control enableIt" placeholder="Phone Number" disabled>
+                        <span class="glyphicon glyphicon-earphone form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Email Id</label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="custom form-control enableIt" placeholder="Email Id" disabled>
+                        <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <img class="sectionIcon" src="images/bank-title-icon.png"/>
+            <p class="ml15">Personal Details</p>
+            <div class="form-horizontal">
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">PAN Number</label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="custom form-control enableIt" placeholder="PAN Number" disabled>
+                        <span class="glyphicon glyphicon-credit-card form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Service Tax Number</label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="custom form-control enableIt" placeholder="Service Tax Number" disabled>
+                        <span class="glyphicon glyphicon-credit-card form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Aadhar Card</label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="custom form-control enableIt" placeholder="Aadhar Card" disabled>
+                        <span class="glyphicon glyphicon-credit-card form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <img class="sectionIcon" src="images/bank-title-icon.png"/>
+            <p class="ml15">Bank Details</p>
+            <div class="form-horizontal">
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Account Holder Name </label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="custom form-control enableIt" placeholder="Account Holder Name " disabled>
+                        <span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Bank Account No </label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="custom form-control enableIt" placeholder="Bank Account No " disabled>
+                        <span class="glyphicon glyphicon-list-alt form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Bank Name </label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="custom form-control enableIt" placeholder="Bank Name " disabled>
+                        <span class="glyphicon glyphicon-folder-open form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Branch Name </label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="custom form-control enableIt" placeholder="Branch Name " disabled>
+                        <span class="glyphicon glyphicon-briefcase form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">IFSC number </label>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="custom form-control enableIt" placeholder="IFSC number " disabled>
+                        <span class="glyphicon glyphicon-list-alt form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <img class="sectionIcon" src="images/bank-title-icon.png"/>
+            <p class="ml15">Status Change History</p>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr class="lightBackground whiteColor">
+                        <th>Status</th>
+                        <th>Updated By</th>
+                        <th>Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Approved</td>
+                        <td>Ravi Kumar</td>
+                        <td>11-11-2016</td>
+                    </tr>
+                    <tr>
+                        <td>Rejected</td>
+                        <td>Ravi</td>
+                        <td>11-10-2016</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer darkBlueBackground">
+    <div class="container">
+        <p class="text-muted whiteColor">Ekart Partner, Copyright @ 2016</p>
+    </div>
+</footer>
+<script src="js/jquery-3.1.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>
+    $(function() {
+
+        $('#actions').change(function(){
+            var selectedOption = $('#actions').val();
+            if(selectedOption == 'edit'){
+                $('#actions, .hideOnAction').hide();
+                $('.hidediv').show();
+                $('.enableIt').prop('disabled', false).focus();
+            }
+        });
+        $('#cancelAction').click(function () {
+            $('#actions, .hideOnAction').show();
+            $('.hidediv').hide();
+        })
+
+    });
+</script>
+</body>
+</html>
