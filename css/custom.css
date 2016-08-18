@@ -131,6 +131,9 @@ code {
 .whiteBackground{
     background: #ffffff;
 }
+.bodyBackground{
+    background: #EDF1F4;
+}
 .customDropdown{
     border-radius: 0;
     background: transparent;

@@ -23,24 +23,24 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav flotLeft">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partner <span class="caret orangeColor"></span></a>
+                    <a href="underConstruction.html" target="_blank" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partner <span class="caret orangeColor"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Partner Center</a></li>
-                        <li><a href="#">Partner Executive</a></li>
+                        <li><a href="underConstruction.html" target="_blank">Partner Center</a></li>
+                        <li><a href="underConstruction.html" target="_blank">Partner Executive</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partner Center<span class="caret orangeColor"></span></a>
+                    <a href="underConstruction.html" target="_blank" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partner Center<span class="caret orangeColor"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Partner</a></li>
-                        <li><a href="#">Partner Executive</a></li>
+                        <li><a href="underConstruction.html" target="_blank">Partner</a></li>
+                        <li><a href="underConstruction.html" target="_blank">Partner Executive</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partner Executive<span class="caret orangeColor"></span></a>
+                    <a href="underConstruction.html" target="_blank" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partner Executive<span class="caret orangeColor"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Partner Center</a></li>
-                        <li><a href="#">Partner Executive</a></li>
+                        <li><a href="underConstruction.html" target="_blank">Partner Center</a></li>
+                        <li><a href="underConstruction.html" target="_blank">Partner Executive</a></li>
                     </ul>
                 </li>
                 <li>
@@ -63,8 +63,9 @@
                 <label class="col-lg-4 col-md-4 col-sm-5 col-xs-6 control-label">Action :</label>
                 <div class="col-lg-5 col-md-5 col-sm-4 col-xs-8">
                     <select class="form-control" id="actions">
-                        <option value="approved">Approved</option>
+                        <option selected value="approved">Approved</option>
                         <option value="rejected">Rejected</option>
+                        <option disabled>──────────</option>
                         <option value="edit">Edit</option>
                     </select>
                     <div class="hidediv">
@@ -91,14 +92,14 @@
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Local Address</label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <textarea class="custom form-control enableIt" rows="3" disabled="disabled"></textarea>
+                        <textarea class="bodyBackground form-control enableIt br0" id="localAddress" rows="3" disabled></textarea>
                         <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Permanent Address</label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <textarea class="custom form-control enableIt" rows="3" disabled></textarea>
+                        <textarea class="bodyBackground form-control enableIt br0" rows="3" disabled></textarea>
                         <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
@@ -246,12 +247,15 @@
             if(selectedOption == 'edit'){
                 $('#actions, .hideOnAction').hide();
                 $('.hidediv').show();
-                $('.enableIt').prop('disabled', false).focus();
+                $('.enableIt').prop('disabled', false);
+                $('#localAddress').focus();
             }
         });
         $('#cancelAction').click(function () {
             $('#actions, .hideOnAction').show();
             $('.hidediv').hide();
+            $('.enableIt').prop('disabled', true);
+            $('#actions option:eq(0)').prop('selected', true);
         })
 
     });
