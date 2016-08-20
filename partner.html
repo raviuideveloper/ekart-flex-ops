@@ -8,7 +8,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
 </head>
-<body>
+<body onload="getPartnerDetails();">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -55,8 +55,8 @@
 <div class="container">
     <div class="page-header">
         <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
-            <h4>Partner Name (<span class="linkColor">FLEX106789</span>)</h4>
-            <p><strong>Status: </strong>Approved</p>
+            <h4><span id="partnerName">Partner Name</span> (<span class="linkColor" id="partnerId"></span>)</h4>
+            <p><strong>Status: </strong><span id="status">Status</span></p>
         </div>
         <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
             <div class="form-horizontal row">
@@ -99,7 +99,7 @@
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Permanent Address</label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <textarea class="bodyBackground form-control enableIt br0" rows="3" disabled></textarea>
+                        <textarea class="bodyBackground form-control enableIt br0" id="permanentAddress" rows="3" disabled></textarea>
                         <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
@@ -114,14 +114,14 @@
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Phone Number</label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="custom form-control enableIt" placeholder="Phone Number" disabled>
+                        <input type="text" class="custom form-control enableIt" id="mobileNumber" placeholder="Contact Number" disabled/>
                         <span class="glyphicon glyphicon-earphone form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Email Id</label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="custom form-control enableIt" placeholder="Email Id" disabled>
+                        <input type="text" class="custom form-control enableIt" id="emailId" placeholder="Email Id" disabled>
                         <span class="glyphicon glyphicon-envelope form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
@@ -136,21 +136,21 @@
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">PAN Number</label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="custom form-control enableIt" placeholder="PAN Number" disabled>
+                        <input type="text" class="custom form-control enableIt" id="panNumber" placeholder="PAN Number" disabled>
                         <span class="glyphicon glyphicon-credit-card form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Service Tax Number</label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="custom form-control enableIt" placeholder="Service Tax Number" disabled>
+                        <input type="text" class="custom form-control enableIt" id="ServiceNumber" placeholder="Service Tax Number" disabled>
                         <span class="glyphicon glyphicon-credit-card form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Aadhar Card</label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="custom form-control enableIt" placeholder="Aadhar Card" disabled>
+                        <input type="text" class="custom form-control enableIt" id="aadharNumber" placeholder="Aadhar Card" disabled>
                         <span class="glyphicon glyphicon-credit-card form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
@@ -165,35 +165,35 @@
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Account Holder Name </label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="custom form-control enableIt" placeholder="Account Holder Name " disabled>
+                        <input type="text" class="custom form-control enableIt" id="accountHolderName" placeholder="Account Holder Name " disabled>
                         <span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Bank Account No </label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="custom form-control enableIt" placeholder="Bank Account No " disabled>
+                        <input type="text" class="custom form-control enableIt" id="bankAccount" placeholder="Bank Account No " disabled>
                         <span class="glyphicon glyphicon-list-alt form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Bank Name </label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="custom form-control enableIt" placeholder="Bank Name " disabled>
-                        <span class="glyphicon glyphicon-folder-open form-control-feedback" aria-hidden="true"></span>
+                        <input type="text" class="custom form-control enableIt" id="bankName" placeholder="Bank Name " disabled>
+                        <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">Branch Name </label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="custom form-control enableIt" placeholder="Branch Name " disabled>
-                        <span class="glyphicon glyphicon-briefcase form-control-feedback" aria-hidden="true"></span>
+                        <input type="text" class="custom form-control enableIt" id="branchName" placeholder="Branch Name " disabled>
+                        <span class="glyphicon glyphicon-home form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
                 <label class="col-lg-2 col-md-2 col-sm-2 col-xs-12 control-label">IFSC number </label>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <div class="form-group has-feedback">
-                        <input type="text" class="custom form-control enableIt" placeholder="IFSC number " disabled>
+                        <input type="text" class="custom form-control enableIt" id="ifsc" placeholder="IFSC number " disabled>
                         <span class="glyphicon glyphicon-list-alt form-control-feedback" aria-hidden="true"></span>
                     </div>
                 </div>
@@ -218,11 +218,6 @@
                         <td>Approved</td>
                         <td>Ravi Kumar</td>
                         <td>11-11-2016</td>
-                    </tr>
-                    <tr>
-                        <td>Rejected</td>
-                        <td>Ravi</td>
-                        <td>11-10-2016</td>
                     </tr>
                     </tbody>
                 </table>
@@ -256,9 +251,45 @@
             $('.hidediv').hide();
             $('.enableIt').prop('disabled', true);
             $('#actions option:eq(0)').prop('selected', true);
+            getPartnerDetails();
         })
 
     });
+
+    function getPartnerDetails() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: 'http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partner/2',
+            timeout: 5000,
+            success: function(data, textStatus ) {
+                var partnerData = data.data;
+                console.log(partnerData);
+                $('#partnerName').html(partnerData.organization.name);
+
+                $('#partnerId').html(partnerData.organization.id);
+                $('#status').html(partnerData.status)
+                $('#localAddress').val(partnerData.contact.local_address.address_line1+ ', ' + partnerData.contact.local_address.city + ', ' +
+                        partnerData.contact.local_address.state + ', ' + partnerData.contact.local_address.country);
+                $('#permanentAddress').val(partnerData.contact.permanent_address.address_line1 + ', ' + partnerData.contact.permanent_address.city + ', ' +
+                        partnerData.contact.permanent_address.state + ', ' + partnerData.contact.permanent_address.country);
+                $('#mobileNumber').val(partnerData.contact.mobile);
+                $('#emailId').val(partnerData.contact.email);
+                $('#panNumber').val(partnerData.organization.pan_number);
+                $('#ServiceNumber').val(partnerData.organization.service_tax_number);
+                $('#aadharNumber').val();
+                $('#accountHolderName').val(partnerData.bank_detail.account_holder_name);
+                $('#bankAccount').val(partnerData.bank_detail.bank_account_number);
+                $('#bankName').val(partnerData.bank_detail.bank_name);
+                $('#branchName').val(partnerData.bank_detail.bank_branch_name);
+                $('#ifsc').val(partnerData.bank_detail.bank_ifscnumber);
+            },
+            error: function(xhr, textStatus, errorThrown){
+                console.log('request failed');
+            }
+        });
+    }
+
 </script>
 </body>
 </html>

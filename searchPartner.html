@@ -91,7 +91,7 @@
             </div>
         </div>
         <div class="text-center">
-            <button type="button" class="btn orangeBackground whiteColor br0">Search <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            <button type="button" class="btn orangeBackground whiteColor br0" id="searchPartner">Search <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             </button>
         </div>
     </div>
@@ -141,5 +141,22 @@
 </footer>
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script>
+    $(function() {
+
+        $("#searchPartner").click(function(){
+            $.ajax({
+                type: 'POST',
+                url: 'http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partner/searchPartner',
+                data: {
+                    'partner_id': 2
+                },
+                success: function(msg){
+                    alert('wow' + msg);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
