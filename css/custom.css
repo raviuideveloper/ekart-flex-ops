@@ -173,7 +173,7 @@ code {
 .centerBox{
     margin: auto auto;
 }
-.hidediv{
+.hidediv, .alerBox{
     display: none;
 }
 

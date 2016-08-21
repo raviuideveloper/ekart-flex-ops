@@ -8,7 +8,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
 </head>
-<body>
+<body onLoad="getPartnerList();">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -57,37 +57,37 @@
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Partner Id</label>
-                <input type="email" class="custom form-control" id="" placeholder="Partner Id">
+                <input type="text" class="custom form-control searchpartnerId" placeholder="Partner Id"/>
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Partner Name</label>
-                <input type="email" class="custom form-control" id="" placeholder="Partner Name">
+                <input type="text" class="custom form-control partnerName" placeholder="Partner Name">
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Zone</label>
-                <input type="email" class="custom form-control" id="" placeholder="Zone">
+                <input type="text" class="custom form-control zone" placeholder="Zone">
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Pincode</label>
-                <input type="email" class="custom form-control" id="" placeholder="Pincode">
+                <input type="text" class="custom form-control pincode" placeholder="Pincode">
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Partner Type</label>
-                <input type="email" class="custom form-control" id="" placeholder="Partner Type">
+                <input type="text" class="custom form-control partnerType" placeholder="Partner Type">
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Status</label>
-                <input type="email" class="custom form-control" id="" placeholder="Status">
+                <input type="text" class="custom form-control status" placeholder="Status">
             </div>
         </div>
         <div class="text-center">
@@ -116,17 +116,8 @@
                                 <th>Created Date</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Partner Id</td>
-                                <td>Partner Name</td>
-                                <td>560034</td>
-                                <td>Zone</td>
-                                <td>Partner Type</td>
-                                <td>Approved</td>
-                                <td>11-11-2016</td>
-                            </tr>
-                        </tbody>
+                        <tbody id="partnerList"></tbody>
+                        <tbody id="partnerListOnSearch"></tbody>
                     </table>
                 </div>
             </div>
@@ -142,21 +133,68 @@
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
-    $(function() {
-
-        $("#searchPartner").click(function(){
-            $.ajax({
-                type: 'POST',
-                url: 'http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partner/searchPartner',
-                data: {
-                    'partner_id': 2
-                },
-                success: function(msg){
-                    alert('wow' + msg);
+    function getPartnerList() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: 'http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partner/all',
+            timeout: 5000,
+            success: function(data, textStatus ) {
+                $('#partnerListOnSearch').hide();
+                var partnerData = data.data;
+                var out = '';
+                for(var i = 0; i < partnerData.length; i++){
+                    out += '<tr>' +
+                            '<td>' + '<a id=\"partnerId-'+i+'\" href="javascript:void(0);" onclick="gotoPartnerPage(this.id);">' + partnerData[i].organization.id + '</a>' + '</td>' +
+                            '<td>' + partnerData[i].organization.name + '</td>' +
+                            '<td>' + partnerData[i].contact.permanent_address.pincode + '</td>' +
+                            "<td>" + ' ' + "</td>" +
+                            '<td>' + partnerData[i].organization.organization_type_detail.type + '</td>' +
+                            '<td>' + partnerData[i].status + '</td>' +
+                            '<td>' + ' ' + '</td>' + '</tr>';
                 }
-            });
+                document.getElementById("partnerList").innerHTML = out
+            },
+            error: function(xhr, textStatus, errorThrown){
+                console.log('request failed');
+            }
         });
+    }
+
+    $("#searchPartner").click(function () {
+        var searchPartnerId = $('.searchpartnerId').val();
+        var partnerNameValue = $('.partnerName').val();
+        var zoneValue = $('.zone').val();
+        var pincodeValue = $('.pincode').val();
+        var partnerTypeValue = $('.partnerType').val();
+        var statusValue = $('.status').val();
+
+        $.ajax({ method: "POST", url: "http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partner/searchPartner",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            data: JSON.stringify({'partner_id' : searchPartnerId, 'pincode' : pincodeValue, 'partner_name': partnerNameValue, 'partner_type': partnerTypeValue, 'status': statusValue}),
+            success: function (data) {
+                console.log(data);
+                $('#partnerListOnSearch').show();
+                $('#partnerList').hide();
+            },
+            error: function (e) {
+                console.log("failed");
+                console.log(e);
+            },
+            dataType: 'text'
+        });
+
     });
+
+    function gotoPartnerPage(e) {
+        var partnerIdValue = $("#"+e).html();
+        if (partnerIdValue != undefined || partnerIdValue != null || partnerIdValue != '') {
+            window.location = 'partner.html?partnerId=' + partnerIdValue;
+        }
+    }
+
 </script>
 </body>
 </html>

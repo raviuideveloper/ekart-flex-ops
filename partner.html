@@ -78,7 +78,26 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 hideOnAction">
-                    <button type="button" class="btn orangeBackground whiteColor br0">SUBMIT</button>
+                    <button type="button" class="btn orangeBackground whiteColor br0" onclick="onActionCall();">SUBMIT</button>
+                </div>
+                <div class="clearfix"></div>
+                <div class="alerBox mt10" id="showApprovalSuccess">
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        Partner has been approved.
+                    </div>
+                </div>
+                <div class="alerBox mt10" id="showRejectedSuccess">
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        Partner has been rejected.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                </div>
+                <div class="alerBox mt10" id="apiFail">
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        Something went wrong, please after sometime.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -213,13 +232,7 @@
                         <th>Date</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>Approved</td>
-                        <td>Ravi Kumar</td>
-                        <td>11-11-2016</td>
-                    </tr>
-                    </tbody>
+                    <tbody id="partnerList"></tbody>
                 </table>
             </div>
             </div>
@@ -257,14 +270,18 @@
     });
 
     function getPartnerDetails() {
+        var map = decodeURIComponent(window.location.search.substring(1)).split('?');
+        var item1 = map[0];
+        var item2 = item1.split('=');
+        var partnerIdValue = item2[1];
+        console.log(partnerIdValue);
         $.ajax({
             type: 'GET',
             dataType: 'json',
-            url: 'http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partner/2',
+            url: 'http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partner/'+partnerIdValue+'',
             timeout: 5000,
             success: function(data, textStatus ) {
                 var partnerData = data.data;
-                console.log(partnerData);
                 $('#partnerName').html(partnerData.organization.name);
 
                 $('#partnerId').html(partnerData.organization.id);
@@ -288,6 +305,71 @@
                 console.log('request failed');
             }
         });
+
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: 'http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partner/all',
+            timeout: 5000,
+            success: function(data, textStatus ) {
+                var partnerData = data.data;
+                console.log(partnerData);
+                var out = "";
+                for(var i = 0; i < partnerData.length; i++){
+                    out += "<tr>" +
+                            '<td>' + partnerData[i].status + '</td>' +
+                            '<td id="updateBy">' + partnerData[i].updated_by + '</td>' +
+                            "<td>" + '' + "</td>" + "</tr>";
+                }
+                document.getElementById("partnerList").innerHTML = out;
+            },
+            error: function(xhr, textStatus, errorThrown){
+                console.log('request failed');
+            }
+        });
+    }
+
+    function onActionCall() {
+        var selectedValue = $('#actions').val();
+        var partnerIdValue = $('#partnerId').html();
+        var updateByValue = $('#updateBy').html();
+        if(selectedValue == 'approved'){
+            $.ajax({ method: "POST", url: "http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partner/approvePartner",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify({
+                    'partner_id' : partnerIdValue,
+                    'updated_by': 'updateByValue',
+                    'remarks': 'some reason'
+                }),
+                success: function (e) {
+                    $("#showApprovalSuccess").show().delay(5000).fadeOut();
+                },
+                error: function (e) {
+                    $("#apiFail").show().delay(5000).fadeOut();
+                },
+                dataType: 'text'
+            });
+        }else if(selectedValue == 'rejected'){
+            $.ajax({ method: "POST", url: "http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partner/rejectPartner",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                data: JSON.stringify({
+                    'partner_id' : partnerIdValue,
+                    'updated_by': 'updateByValue',
+                    'remarks': 'some reason'
+                }),
+                success: function (e) {
+                    $("#showRejectedSuccess").show().delay(5000).fadeOut();
+                },
+                error: function (e) {
+                    $("#apiFail").show().delay(5000).fadeOut();
+                },
+                dataType: 'text'
+            });
+        }
     }
 
 </script>
