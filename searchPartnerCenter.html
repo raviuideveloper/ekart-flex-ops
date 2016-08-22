@@ -8,7 +8,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
 </head>
-<body>
+<body onload="getPartnerCenterList();">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -57,37 +57,37 @@
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Partner Center Id</label>
-                <input type="email" class="custom form-control" id="" placeholder="Partner Center Id">
+                <input type="email" class="custom form-control" placeholder="Partner Center Id">
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Partner Center Name</label>
-                <input type="email" class="custom form-control" id="" placeholder="Partner Center Name">
+                <input type="email" class="custom form-control" placeholder="Partner Center Name">
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>EKart Parent DH ID</label>
-                <input type="email" class="custom form-control" id="" placeholder="EKart Parent DH ID">
+                <input type="email" class="custom form-control" placeholder="EKart Parent DH ID">
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Pincode</label>
-                <input type="email" class="custom form-control" id="" placeholder="Pincode">
+                <input type="email" class="custom form-control" placeholder="Pincode">
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Partner Center Type</label>
-                <input type="email" class="custom form-control" id="" placeholder="Partner Center Type">
+                <input type="email" class="custom form-control" placeholder="Partner Center Type">
             </div>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
             <div class="form-group">
                 <label>Status</label>
-                <input type="email" class="custom form-control" id="" placeholder="Status">
+                <input type="email" class="custom form-control" placeholder="Status">
             </div>
         </div>
         <div class="text-center">
@@ -116,16 +116,8 @@
                             <th>Created Date</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>Partner Id</td>
-                            <td>Partner Name</td>
-                            <td>560034</td>
-                            <td>Zone</td>
-                            <td>Partner Type</td>
-                            <td>Approved</td>
-                            <td>11-11-2016</td>
-                        </tr>
+                        <tbody id="partnerCenterList">
+
                         </tbody>
                     </table>
                 </div>
@@ -141,5 +133,41 @@
 </footer>
 <script src="js/jquery-3.1.0.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<script>
+    function getPartnerCenterList() {
+        $.ajax({
+            type: 'GET',
+            dataType: 'json',
+            url: 'http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partnerCentre/all',
+            timeout: 5000,
+            success: function(data, textStatus ) {
+                var partnerCenterData = data.data;
+                console.log(partnerCenterData);
+                var out = '';
+                for(var i = 0; i < partnerCenterData.length; i++){
+                    out += '<tr>' +
+                            '<td>' + '<a id=\"partnerId-'+i+'\" href="javascript:void(0);" onclick="gotoPartnerCenterPage(this.id);">' + partnerCenterData[i].partner_centre_id + '</a>' + '</td>' +
+                            '<td>' + partnerCenterData[i].facility_name + '</td>' +
+                            '<td>' + partnerCenterData[i].pincode + '</td>' +
+                            "<td>" + partnerCenterData[i].zone + "</td>" +
+                            '<td>' + partnerCenterData[i].partner_centre_type + '</td>' +
+                            '<td>' + partnerCenterData[i].status + '</td>' +
+                            '<td>' + ' ' + '</td>' + '</tr>';
+                }
+                document.getElementById("partnerCenterList").innerHTML = out
+            },
+            error: function(xhr, textStatus, errorThrown){
+                console.log('request failed');
+            }
+        });
+    }
+
+    function gotoPartnerCenterPage(e) {
+        var partnerCenterIdValue = $("#"+e).html();
+        if (partnerCenterIdValue != undefined || partnerCenterIdValue != null || partnerCenterIdValue != '') {
+            window.location = 'partnerCenter.html?partnerId=' + partnerCenterIdValue;
+        }
+    }
+</script>
 </body>
 </html>

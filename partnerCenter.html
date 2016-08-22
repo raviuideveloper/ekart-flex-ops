@@ -8,7 +8,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
 </head>
-<body>
+<body onload="getPartnerCenterDetails();">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -55,7 +55,7 @@
 <div class="container">
     <div class="page-header">
         <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
-            <h4>Partner Center Name (<span class="linkColor">FLEX106789</span>)</h4>
+            <h4><span id="partnerCenterName">Partner Name</span> (<span class="linkColor" id="partnerCenterId"></span>)</h4>
             <p><strong>Status: </strong>Approved</p>
         </div>
         <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12">
@@ -216,6 +216,45 @@
         })
 
     });
+
+    function getPartnerCenterDetails() {
+            var map = decodeURIComponent(window.location.search.substring(1)).split('?');
+            var item1 = map[0];
+            var item2 = item1.split('=');
+            var partnerCenterIdValue = item2[1];
+            console.log(partnerCenterIdValue);
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: 'http://ekart-flex-service-apis-alpha-0001.nm.flipkart.com:27035/v1/partnerCentre/' + partnerCenterIdValue + '',
+                timeout: 5000,
+                success: function (data, textStatus) {
+                    var partnerCenterData = data.data;
+                    console.log(partnerCenterData);
+                    $('#partnerCenterName').html(partnerCenterData.facility.name);
+                    $('#partnerCenterId').html(partnerCenterData.facility.id);
+                    //$('#status').html(partnerData.status)
+                    $('#localAddress').val(partnerCenterData.facility.address.bu_name + ', '  + partnerCenterData.facility.address.address_line1 + ', ' + partnerCenterData.facility.address.city + ', ' +
+                            partnerCenterData.facility.address.state + ', ' + partnerCenterData.facility.address.country + ', ' + 'Pincode : ' + partnerCenterData.facility.address.postal_code);
+                    //$('#permanentAddress').val(partnerData.contact.permanent_address.address_line1 + ', ' + partnerData.contact.permanent_address.city + ', ' +
+                    //        partnerData.contact.permanent_address.state + ', ' + partnerData.contact.permanent_address.country);
+                    //$('#mobileNumber').val(partnerData.contact.mobile);
+                    //$('#emailId').val(partnerData.contact.email);
+                    //$('#panNumber').val(partnerData.organization.pan_number);
+                    //$('#ServiceNumber').val(partnerData.organization.service_tax_number);
+                    //$('#aadharNumber').val();
+                    //$('#accountHolderName').val(partnerData.bank_detail.account_holder_name);
+                    //$('#bankAccount').val(partnerData.bank_detail.bank_account_number);
+                    //$('#bankName').val(partnerData.bank_detail.bank_name);
+                    //$('#branchName').val(partnerData.bank_detail.bank_branch_name);
+                    //$('#ifsc').val(partnerData.bank_detail.bank_ifscnumber);
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('request failed');
+                }
+            });
+    }
+
 </script>
 </body>
 </html>
